@@ -1,0 +1,64 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+  {% load static %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% block css %}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static '/css/bootstrap.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+ 	<link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
+	 {% endblock %}
+    <title>{% block title %} {% endblock %}</title>
+  </head>
+  <body>
+  {% include 'blog/nav.html' %}
+    <div class="container">
+	<h1 class="title" align="center" style="margin-top: 40px;color: #4a4f5f;">Welcome to Student & Teacher Management System</h1>
+
+	{% block body %} {% endblock %}
+
+
+
+
+
+
+	</div>
+
+
+	{% if user.is_authenticated %}
+	<br><br><br><br><br><br><br><br><br><br><br><br>
+	<footer class="footer">
+    <div class="container-text-center" align="center">
+    	<div class="footermenu" align="left" style="padding-left: 100px;"><a href="{% url 'index' %}">Home</a>
+    		<a href="{% url 'about' %}" style="padding-left: 100px;">About</a>
+    		<a href="admin" style="padding-left: 100px;">Admin</a>
+    		<p align="right" style="margin-right: 150px; margin-top: -60px;">Student Management System</p>
+    	</div>
+
+    	<div class="footermenu" align="left" style="padding-left: 100px;"><a href="{% url 'contact' %}">Contact</a>
+    		<a href="{% url 'feedback' %}" style="padding-left: 88px;">Feedback</a>
+    		<a href="{% url 'index' %}" style="padding-left: 78px;">SMS</a>
+    		
+    	</div>
+      
+    <div/>
+  </footer>
+	
+{% else %}
+
+{% endif %}
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/poper.js' %}"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+{% block js %}
+{% endblock js %}
+  </body>
+</html>

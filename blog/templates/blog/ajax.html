@@ -1,0 +1,29 @@
+<script>
+  function status(subid, stuid, presentvalue) {
+    console.log(subid+" "+stuid+" "+presentvalue)
+
+    $.ajax({
+      type: 'POST',
+      
+      url:'/attandances'+'/'+subid+'/'+stuid+'/'+presentvalue,
+      data: {
+        studentId:stuid,
+        periodid:subid,
+        value:presentvalue
+        
+      },
+      success: function (response) {
+        console.log('success is running')
+       
+      },
+      error: function (response) {
+       console.log('error is running')
+      }
+    });
+
+
+  }
+
+
+
+</script>

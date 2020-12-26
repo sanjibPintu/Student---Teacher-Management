@@ -1,0 +1,152 @@
+{% extends 'blog/basic.html' %}
+{% load static %}
+{% block title %}Student Management System#{% endblock %}
+{% block body %}
+{% if user.is_authenticated %}
+<div class="row" style="border: 3px solid rgb(243, 167, 4);">
+	<div class="col-sm-5 mx-auto" style="border:1px solid red">
+		<table class="head" style="width:40%; margin-top: 20px;" align="center" border="2">
+			<tr>
+				<td colspan="2" align="center">Teacher Information</td>
+			</tr>
+
+			<tr>
+				<td align="left"> Employee No</td>
+				<td><input type="number" name="empno" id="empNo" required></td>
+			</tr>
+
+			<tr>
+				<td align="left"> Phone No</td>
+				<td><input type="text" name="phoneno" id="empPhoneNo" required></td>
+			</tr>
+
+			<tr>
+				<td colspan="2" align="center"><input type="submit" onclick="teacherDataSubmit()" class="btn btn-outline-info"
+						name="submit" value="Show Info"></td>
+			</tr>
+		</table>
+		<!-- javascript -->
+		{% block js %}
+		<script>
+			function teacherDataSubmit() {
+				let empNo = $('#empNo').val()
+				let empPhoneNo = $('#empPhoneNo').val()
+				if (empNo == "") {
+					console.log('fill up the field');
+				}
+
+				else if (empPhoneNo == "") {
+					console.log("fill the filed");
+				}
+
+				else {
+					// calling ajax
+					
+					$.ajax({
+						type: 'POST',
+
+						url: "{% url 'teacher' %}",
+						data:{
+							empno:empNo,
+							phoneno:empPhoneNo
+						},
+						success: function (data) {
+							if (data.status == "Save") {
+								console.log('----------------')
+								console.log(data.period_obj)
+								$("#upeerrow").append(
+									`
+									<div class="alert alert-warning alert-dismissible fade show" role="alert">
+										<strong>${data.tacher_obj.name}</strong> You are Asgin to ${data.period_obj.name}.
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											
+										</button>
+									</div>
+									<div class="row mt-3" id="secoundRow" style="border: 1px solid pink;">
+										<div class="col-sm-5" style="border: 1px solid blue">
+											<table class="table">
+												<thead>
+													<tr>
+														<th colspan="3">Teacher Deatils</th>
+													</tr>
+												</thead>
+
+												<tr>
+													<td rowspan="5"><img src="/images/${data.tacher_obj.image}"
+															style="max-height: 150px; max-width: 80px; padding-left: 10px;"></td>
+													<th>Full Name</th>
+													<td align="center">${data.tacher_obj.name}</td>
+												</tr>
+
+												<tr>
+													<th>Employee No</th>
+													<td align="center">${data.tacher_obj.EmployeeNo}</td>
+												</tr>
+
+												<tr>
+													<th>City</th>
+													<td align="center">${data.tacher_obj.city}</td>
+												</tr>
+												
+												<tr>
+													<th>Degree</th>
+													<td align="center">${data.tacher_obj.degree}</td>
+												</tr>
+												<tr>
+													<th>Contact No</th>
+													<td align="center">${data.tacher_obj.phoneNo}</td>
+												</tr>
+
+											</table>
+										
+										</div>
+										</div>
+										<a href="/attandance/${data.period_obj.name}" class="btn btn-primary btn-lg">Go to Attandance page</a>
+										`
+								);
+								// break;
+							}
+							else {
+									$("#upeerrow").append(
+										`<p class="alert alert-danger mt-3">No Record Found or Please Asgin his or her Period</p>`
+									)
+							}
+						
+
+						},
+						error: function (response) {
+							console.log('error is running')
+						}
+					});
+
+
+
+				}
+
+			}
+		</script>
+		{% endblock js %}
+	</div>
+	
+</div>
+
+<div id="upeerrow">
+
+</div>
+
+
+
+
+
+{% else %}
+<!-- if user is not authenticated show this images -->
+<form>
+
+	<div>
+		<img src='{% static "images/Autu.jpg" %}'
+			style="margin-top:0px; height: 700px; width: 1333px; margin-bottom: -66px;">
+	</div>
+</form>
+{% endif %}
+
+{% endblock %}

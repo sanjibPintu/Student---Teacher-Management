@@ -1,0 +1,59 @@
+{% extends 'blog/basic.html' %}
+
+{% block title %}Student Management System#{% endblock %}
+{% block body %}
+{% load static %}
+<h1 class="text-center">This is Attandance page </h1>
+<div class="row">
+	<div class="col-sm-8 mx-auto" style="border:2px solid red">
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Name</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+
+			<tbody id="tablebody">
+				
+				{% for s in p %}
+				
+				
+				<tr>
+					<td id="studentName">{{s.name}}</td>
+				
+				{% csrf_token %}
+					<td>
+						
+						
+				 
+				 
+					<input type="submit" class="btn btn-outline-success btn-present" id="present" onclick="status({{period_obj.id}},{{s.id}},'True')"  name="present"   value="Present">
+						
+						
+					<input type="submit" class="btn btn-outline-danger btn-absent" onclick="status({{period_obj.id}},{{s.id}},'False')" id="absent"  name="absent"  value="Absent">
+						
+				
+					
+					</td>
+				</form>
+
+				</tr>
+					{% endfor %}
+				
+			
+		
+			</tbody>
+		</table>
+	</div>
+
+</div>
+
+
+
+
+{% endblock %}
+{% block js %}
+{% include 'blog/ajax.html' %}
+{% endblock js %}

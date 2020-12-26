@@ -1,0 +1,28 @@
+{% extends 'blog/basic.html' %}
+
+{% block title %}contact page{% endblock %}
+
+{% block body %}
+{% load static %}
+	
+  <div class="container" align="center">
+    <div class="contact-box">
+      <div class="left">
+        <img src="{% static 'images/contact.jpg' %}" style="margin-top: 120px; height: 320px; width: 320px;">
+      </div>
+      <div class="right">
+        <h2>Contact Us</h2>
+        <input type="text" class="field" placeholder="Your Full Name">
+        <input type="text" class="field" placeholder="Your Email">
+        <!-- <input type="text" class="field" placeholder="Phone"> -->
+        <textarea placeholder="Message" class="field"></textarea>
+        
+       
+       
+        <br/>
+        <br/> 
+        <button class="btn btn-primary btn-lg">Send</button>
+      </div>
+    </div>
+  </div>
+{% endblock %}
